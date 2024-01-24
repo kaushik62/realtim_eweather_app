@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>Sign-up</title>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        background-color: paleturquoise;
+      }
+
+      .form_container {
+        width: 380px;
+        position: relative;
+        border-radius: 5px;
+        box-sizing: border-box;
+        box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.4);
+        background-color: white;
+        padding: 30px;
+      }
+
+      .form_container h3 {
+        font-size: 25px;
+        color: rgb(0, 33, 151);
+        letter-spacing: 1px;
+        margin: 5px 0px 20px 0px;
+        font-family: "Roboto", sans-serif;
+      }
+
+      .form_container p {
+        font-size: 15px;
+        font-family: "Roboto", sans-serif;
+        margin: 10px 0px 5px 0px;
+      }
+
+      .form_container input {
+        width: 100%;
+        padding: 10px 0px;
+        font-size: 18px;
+        font-family: "Roboto", sans-serif;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid black;
+      }
+
+      #signup {
+        background-color: rgb(255, 166, 0);
+        font-size: 21px;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+        margin-top: 50px;
+        cursor: pointer;
+        font-family: "Roboto", sans-serif;
+        padding: 10px;
+      }
+
+      #signup:active {
+        background-color: rgb(255, 166, 0);
+        transform: scale(1.02);
+      }
+      #signup:hover {
+        background-color: rgb(255, 188, 63);
+      }
+
+      .form_container span {
+        color: rgb(0, 33, 151);
+        font-size: 21px;
+        cursor: pointer;
+      }
+
+      .para a {
+        text-decoration: none;
+      }
+
+      .para_danger {
+        color: red;
+        position: absolute;
+        text-align: center;
+        left: 80px;
+        font-family: "Roboto", sans-serif;
+        transition: 0.3s;
+        animation: danger_success_animation 0.3s linear;
+        display: none;
+      }
+
+      .para_success {
+        color: green;
+        position: absolute;
+        left: 55px;
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        transition: 0.3s;
+        animation: danger_success_animation 0.3s linear;
+        display: none;
+      }
+
+      @keyframes danger_success_animation {
+        0% {
+          transform: scale(0.1);
+        }
+
+        50% {
+          transform: scale(0.5);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      #google_signup {
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: none;
+        padding: 7px 9px;
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        width: 100%;
+        font-size: 20px;
+        color: white;
+        margin-top: 15px;
+        position: relative;
+        background-color: #4081ec;
+      }
+
+      #google_signup:hover {
+        background-color: #5f9cff;
+      }
+
+      #google_signup img {
+        height: 30px;
+        width: 30px;
+        border-radius: 4px;
+        position: absolute;
+        left: 10px;
+        bottom: 4px;
+        align-items: center;
+      }
+      .scroll_page{
+        transition: ease;
+        transition-duration: 0.4s;
+        animation: 0.2s scroll_page_animation linear;
+      }
+      @keyframes scroll_page_animation {
+        0%{
+          transform: scale(0.2);
+        }
+        25%{
+          transform: scale(0.5);
+        }
+        50%{
+          transform: scale(0.7);
+        }
+        100%{
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="scroll_page">
+    <!-- sign up -->
+
+<div class="popup_signin" id="popup_signup">
+  <div class="form_container">
+      <h3>Signup</h3>
+      <p>Name</p>
+      <input type="text" id="username" placeholder="Enter name" />
+      <p>Email</p>
+      <input type="email" placeholder="Enter email" name="email" id="email" />
+      <p>Password</p>
+      <input type="password" placeholder="Enter above 6 digits password" name="password" id="password" />
+      <p style="font-size: 19px" class="para_danger">
+          All fields are mandatory <br> <span style="font-size: 15px; color: steelblue; ">( or user already registered )</span>
+      </p>
+      <p style="font-size: 19px" class="para_success">
+          You are registered successfully
+      </p>
+      <button value="1" type="submit" name="signup" id="signup" class="register" onclick="signup()">
+          Sign up
+      </button>
+      <p style="text-align: center; font-size: 17px">--------------------------- or --------------------------</p>
+      <button value="2" id="google_signup">
+          <img src="Image/2.png" alt="" />Sign up with Google
+      </button>
+      <p class="para">
+        Already have an account ? <span><a href="login.html">Login</a></span>
+      </p>
+  </div>
+</div>
+    </div>
+    <!-- firebase -->
+
+    <script type="module" src="apiscript.js"></script>
+
+    <!-- Sign up with Email -->
+
+<script type="module">
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyA_q2uvFfJtYtn-CFmS3YMeI_X_U0byz6I",
+    authDomain: "project-auth-e65a5.firebaseapp.com",
+    databaseURL: "https://project-auth-e65a5-default-rtdb.firebaseio.com",
+    projectId: "project-auth-e65a5",
+    storageBucket: "project-auth-e65a5.appspot.com",
+    messagingSenderId: "738281884617",
+    appId: "1:738281884617:web:911b9437a2314ca1db3618"
+  };
+  
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+//  signup with email
+
+let para_danger = document.querySelector(".para_danger");
+let para_success = document.querySelector(".para_success");
+
+document.querySelector(".register").addEventListener("click", function(){
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  
+  createUserWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
+  const user = userCredential.user;
+  console.log(user);
+  para_success.style.display = "block";
+  setTimeout(() => {
+    window.location.href = "/login.html";
+  }, 1000);
+
+})
+.catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  console.log(errorMessage)
+  para_danger.style.display = "block";
+});
+})
+ 
+
+//  login with Google
+let google_signup = document.querySelector("google_signup");
+    google_signup.addEventListener("click", function () {
+      signInWithPopup(auth, provider).then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        console.log(user);
+        window.location.href = "/weather.html";
+
+        // log_in.document.getElementById("sign_in_btn").style.display = "none";
+      });
+    });
+
+
+</script>
+  </body>
+</html>
